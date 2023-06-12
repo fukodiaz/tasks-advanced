@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist",
+		"target": "es6",
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"esnext"
+		],
+		"module": "commonjs",
+		"jsx": "react-jsx",
+		"allowJs": true,
+		"noImplicitAny": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noEmitOnError": false,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		]
+	},
+	"include": ["./src"]
+}
