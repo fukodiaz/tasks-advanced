@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const cryptoJS = require('crypto-js')
+const jsonwebtoken = require('jsonwebtoken')	
 
 const errors = [
 	{
@@ -18,7 +19,12 @@ exports.register = async (req, res) => {
 		)
 
 		const user = await User.create(req.body)
-		res.status(201).json({ user })
+		const token = jsonwebtoken.sign(
+			{id: user._id},
+			process.env.TOKEN_KEY,
+			{expiresIn: '24h'}
+		)
+		res.status(201).json({ user, token })
 
 	} catch (err) {
 		res.status(500).json(err)
@@ -44,7 +50,13 @@ exports.login = async (req, res) => {
 
 		user.password = undefined
 
-		res.status(200).json({ user })
+		const token = jsonwebtoken.sign(
+			{id: user._id},
+			process.env.TOKEN_KEY,
+			{expiresIn: '24h'}
+		)
+
+		res.status(200).json({ user, token })
 
 	} catch (err) {
 		res.status(500).json(err)
